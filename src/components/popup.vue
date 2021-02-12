@@ -8,7 +8,7 @@
       <ul class="content__list">
         <li v-if="popupInfo.version !== undefined">Version:{{ popupInfo.version }}</li>
         <li v-if="popupInfo.description !== undefined">Description:{{ popupInfo.description }}</li>
-        <li v-if="popupInfo.author.name !== undefined">Author:{{ popupInfo.author.name }}</li>
+        <li v-if="popupInfo.author !== undefined">Author:{{ popupInfo.author.name }}</li>
         <li class="links" v-if="popupInfo.links.npm !== undefined">
           Links:<a
             :href="popupInfo.links.npm">{{ popupInfo.links.npm }}
