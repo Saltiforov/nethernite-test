@@ -15,13 +15,13 @@
           circle
       ></v-pagination>
     </div>
-    <popup  :popup-opened.sync="popupOpened" :popup-info="popupInfo"></popup>
+    <popup :popup-opened.sync="popupOpened" :popup-info="popupInfo"></popup>
     <page-footer/>
   </v-app>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import {mapActions, mapState} from 'vuex'
 import Contents from "./components/contents";
 import Popup from "./components/popup";
 import PageFooter from "@/components/PageFooter";
@@ -43,10 +43,10 @@ export default {
     ...mapActions([
       'SEARCH_PACKAGES'
     ]),
-    search(){
+    search() {
       this.SEARCH_PACKAGES(this.name)
     },
-    popup($event){
+    popup($event) {
       this.popupItem = $event
     }
   },
@@ -56,10 +56,10 @@ export default {
     ...mapState({
       packages: state => state.packages,
     }),
-    pageLenght(){
+    pageLenght() {
       return this.packages.length / 10
     },
-    popupInfo(){
+    popupInfo() {
       return this.packages[this.popupId]
     }
   },

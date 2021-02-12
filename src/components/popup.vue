@@ -3,14 +3,22 @@
     <div class="content">
       <v-btn @click.prevent="$emit('update:popup-opened', false)">X</v-btn>
       <div class="popup__name text-center">
-        <h4 v-if="popupInfo.name !== undefined">{{popupInfo.name}}</h4>
+        <h4 v-if="popupInfo.name !== undefined">{{ popupInfo.name }}</h4>
       </div>
       <ul class="content__list">
-        <li v-if="popupInfo.version !== undefined">Version:{{popupInfo.version}}</li>
-        <li v-if="popupInfo.description !== undefined">Description:{{popupInfo.description}}</li>
-        <li v-if="popupInfo.author.name !== undefined">Author:{{popupInfo.author.name}}</li>
-        <li class="links" v-if="popupInfo.links.npm !== undefined">Links:<a :href="popupInfo.links.npm">{{popupInfo.links.npm}}</a></li>
-        <li class="links" v-if="popupInfo.links.homepage !== undefined">Homepage:<a :href="popupInfo.links.homepage">{{popupInfo.links.homepage}}</a></li>
+        <li v-if="popupInfo.version !== undefined">Version:{{ popupInfo.version }}</li>
+        <li v-if="popupInfo.description !== undefined">Description:{{ popupInfo.description }}</li>
+        <li v-if="popupInfo.author.name !== undefined">Author:{{ popupInfo.author.name }}</li>
+        <li class="links" v-if="popupInfo.links.npm !== undefined">
+          Links:<a
+            :href="popupInfo.links.npm">{{ popupInfo.links.npm }}
+        </a>
+        </li>
+        <li class="links" v-if="popupInfo.links.homepage !== undefined">
+          Homepage:<a
+            :href="popupInfo.links.homepage">{{ popupInfo.links.homepage }}
+        </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -33,7 +41,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.popup{
+.popup {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -44,21 +52,26 @@ export default {
   align-items: center;
   justify-content: center;
   transition: all 0.5s ease;
-  &.opened{
+
+  &.opened {
     opacity: 1;
     z-index: 1000;
   }
-  .content{
+
+  .content {
     width: 350px;
     height: 350px;
     background: white;
     border-radius: 50px;
     overflow: hidden;
-    &__list{
+
+    &__list {
       padding: 10px 20px 10px 20px;
-      li{
+
+      li {
         padding-top: 10px;
-        a{
+
+        a {
           color: black;
         }
       }
@@ -66,12 +79,12 @@ export default {
   }
 
 }
-.links{
+
+.links {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
-
 
 
 </style>
