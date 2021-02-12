@@ -1,60 +1,67 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld/>
-    </v-main>
+    <v-text-field
+        label="Package name"
+        @keyup="search"
+        v-model.trim="name"
+    ></v-text-field>
+    <br>
+    <contents :items="packages" :page="page" :popup-opened.sync="popupOpened" :popup-id.sync="popupId"></contents>
+    <br>
+    <div class="text-center">
+      <v-pagination
+          v-model="page"
+          :length="pageLenght"
+          circle
+      ></v-pagination>
+    </div>
+    <popup  :popup-opened.sync="popupOpened" :popup-info="popupInfo"></popup>
+    <page-footer/>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import { mapActions, mapState } from 'vuex'
+import Contents from "./components/contents";
+import Popup from "./components/popup";
+import PageFooter from "@/components/PageFooter";
 
 export default {
   name: 'App',
-
   components: {
-    HelloWorld,
+    PageFooter,
+    Popup,
+    Contents
   },
-
   data: () => ({
-    //
+    name: '',
+    page: 1,
+    popupId: null,
+    popupOpened: false
   }),
+  methods: {
+    ...mapActions([
+      'SEARCH_PACKAGES'
+    ]),
+    search(){
+      this.SEARCH_PACKAGES(this.name)
+    },
+    popup($event){
+      this.popupItem = $event
+    }
+  },
+  mounted() {
+  },
+  computed: {
+    ...mapState({
+      packages: state => state.packages,
+    }),
+    pageLenght(){
+      return this.packages.length / 10
+    },
+    popupInfo(){
+      return this.packages[this.popupId]
+    }
+  },
 };
 </script>
