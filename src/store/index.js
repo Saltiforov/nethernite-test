@@ -22,7 +22,7 @@ export default new Vuex.Store({
   },
   actions: {
     SEARCH_PACKAGES:  async (context, names) => {
-      let {data} = await Axios.get(`-/v1/search?text=${names}&size=250`);
+      let {data} = await Axios.get(`https://registry.npmjs.org/-/v1/search?text=${names}&size=250`);
       context.commit('SET_PACKAGES', data);
     },
   }
